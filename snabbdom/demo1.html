@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+    <button id="btn-change">Change</button>
+<!--  引入相关snabbdom  需要注意版本一致 开始-->
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-class.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-props.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-style.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-eventlisteners.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.1/h.js"></script>
+<!--  引入相关snabbdom  需要注意版本一致 开始-->
+
+<script>
+    let snabbdom = window.snabbdom;
+
+    // 定义 h
+    let h = snabbdom.h;
+
+   //  h函数返回虚拟节点
+    let vnode = h('ul#list',{},[
+        h('li.item',{},'itemA'),
+        h('li.item',{},'itemB')
+    ]);
+
+    console.log('h函数返回虚拟dom为',vnode);
+
+    //定义 patch
+    let patch = snabbdom.init([
+        snabbdom_class,
+        snabbdom_props,
+        snabbdom_style,
+        snabbdom_eventlisteners
+    ]);
+    // 获取container的dom
+    let container = document.getElementById('container');
+    // 第一次patch
+    patch(container,vnode);
+
+    // 添加事件，触发第二次patch
+
+    let btn = document.getElementById('btn-change');
+    // newVnode 没有更改
+    // document.addEventListener('click',function (params) {
+    //     let newVnode = h('ul#list',{},[
+    //             h('li.item',{},'itemA'),
+    //             h('li.item',{},'itemB')
+    //     ]);
+    //     // 第二次patch
+    //     patch(vnode,newVnode);
+    // });
+// newVnode 更改
+    document.addEventListener('click',function (params) {
+        let newVnode = h('ul#list',{},[
+            h('li.item',{},'itemC'),
+            h('li.item',{},'itemB'),
+            h('li.item',{},'itemD')
+        ]);
+        // 第二次patch
+        patch(vnode,newVnode);
+    });
+</script>
+</body>
+</html>

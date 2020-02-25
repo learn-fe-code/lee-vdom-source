@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+    <button id="btn-change">Change</button>
+
+<script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom.js"></script>
+<script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-class.js"></script>
+<script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-props.js"></script>
+<script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-style.js"></script>
+<script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-eventlisteners.js"></script>
+<script src="https://cdn.bootcss.com/snabbdom/0.7.1/h.js"></script>
+
+<script>
+let snabbdom = window.snabbdom;
+
+//定义 patch
+let patch = snabbdom.init([
+    snabbdom_class,
+    snabbdom_props,
+    snabbdom_style,
+    snabbdom_eventlisteners
+])
+
+// 定义 h
+let h = snabbdom.h
+let container = document.getElementById('container');
+
+let vdom = 
+
+{
+    tag:'ul', // 元素的标签类型
+    attrs:{ id:'list'},
+    children:[ // ul元素的子节点
+        {tag: 'li',attrs:{ className:'item'},children:['itemA']},
+        {tag: 'li',attrs:{ className:'item'},children:['itemB']},
+        ]
+}
+
+let vnode = h('ul',{id:'list'},[
+    h('li',{'className':'item'},'itemA'),
+    h('li',{'className':'item'},'itemB')
+]);
+
+patch(container,vnode);
+
+
+</script>
+</body>
+</html>
